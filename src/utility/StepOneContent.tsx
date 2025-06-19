@@ -20,7 +20,7 @@ const StepOneContent = ({ selectedDoctorId, setSelectedDoctorId }: StepOneConten
           (optionA?.label ?? "").toLowerCase().localeCompare((optionB?.label ?? "").toLowerCase())
         }
         options={doctersDetails.map((doctor) => ({
-          label: doctor.doctorName,
+          label: doctor.doctorFirstName + " " + doctor.doctorLastName,
           value: doctor.doctorId,
         }))}
       />

@@ -14,18 +14,18 @@ export interface DoctorsWeeklyScheduleListType {
 }
 export interface doctorDetailsType {
   doctorId: string;
-  doctorName: string;
+  doctorFirstName: string;
+  doctorLastName: string;
+  doctorPhoneNo: string;
   slotDuration: SlotDurationEnum;
-  doctorEmailId: string;
-  password: string;
+  emailId: string;
 }
 export interface nurseDetailsType {
   nurseId: string;
   nurseFirstName: string;
   nurseLastName: string;
   nursePhoneNo: string;
-  nurseEmailId: string;
-  password: string;
+  emailId: string;
 }
 
 export interface BookedSlotsDetailsType {
@@ -53,3 +53,23 @@ export type ModalSlotDetails = {
   email: string;
   note: string | undefined;
 };
+
+export enum RoleEnum {
+  "nurse" = "Nurse",
+  "doctor" = "Doctor",
+}
+export interface ILoggedInUserDetails {
+  userId: string;
+  userRole: RoleEnum;
+  userFirstName: string;
+  userLastName?: string;
+  userEmailId?: string;
+  userPhoneNo?: string;
+}
+
+export interface IUsersList {
+  userId: string;
+  emailId: string;
+  password: string;
+  role: RoleEnum;
+}

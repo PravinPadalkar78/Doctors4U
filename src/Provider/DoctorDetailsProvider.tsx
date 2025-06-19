@@ -36,10 +36,11 @@ const DoctorDetailsProvider = ({ children }: { children: React.ReactNode }) => {
       : [
           {
             doctorId: "1",
-            doctorName: "TestDoctor",
+            doctorFirstName: "Test",
+            doctorLastName: "Doctor",
+            doctorPhoneNo: "8958950560",
             slotDuration: "thirty",
-            doctorEmailId: "abc@gmail.com",
-            password: "abc123",
+            emailId: "abc@gmail.com",
           },
         ];
   });
@@ -70,12 +71,11 @@ const DoctorDetailsProvider = ({ children }: { children: React.ReactNode }) => {
       ? JSON.parse(stored)
       : [
           {
-            nurseId: 1,
-            nurseEmailId: "AnpadNurse@gmail.com",
+            nurseId: "2",
+            emailId: "AnpadNurse@gmail.com",
             nurseFirstName: "Bot",
             nurseLastName: "Nurse",
             nursePhoneNo: "+1 9875852020",
-            password: "abc123",
           },
         ];
   });

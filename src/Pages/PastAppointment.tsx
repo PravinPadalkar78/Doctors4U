@@ -147,8 +147,8 @@ const PastAppointment = () => {
             placeholder="Please select Doctor"
             options={doctersDetails.map((doctor) => {
               return {
-                label: doctor.doctorName,
-                value: doctor.doctorName,
+                label: doctor.doctorFirstName,
+                value: doctor.doctorFirstName,
               } as DefaultOptionType;
             })}
             onChange={(e) => setSelectedDoctors(e)}

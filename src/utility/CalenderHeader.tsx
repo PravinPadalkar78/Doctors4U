@@ -7,14 +7,17 @@ import AppointmentDrawer from "./AppointmentDrawer";
 import { useDoctorDetails } from "../hooks/useDoctorDetails";
 import DrawerFooter from "./DrawerFooter";
 import { useState } from "react";
+import { useAuth } from "../hooks/useAuth";
+import { RoleEnum } from "../Helper/types";
 
 type CalenderHeaderProps = {
   value: Dayjs;
   onChange: (date: Dayjs) => void;
 };
 const CalenderHeader = ({ value, onChange }: CalenderHeaderProps) => {
-  const { isAvailabilityDrawerOpen, setIsAvailabilityDrawerOpen } = useDoctorDetails();
-  const { isAppointmentDrawerOpen, setIsAppointmentDrawerOpen } = useDoctorDetails();
+  const { loggedInUserDetails } = useAuth();
+  const { isAvailabilityDrawerOpen, setIsAvailabilityDrawerOpen, isAppointmentDrawerOpen, setIsAppointmentDrawerOpen } =
+    useDoctorDetails();
   const [selectedSlot, setSelectedSlot] = useState<string | undefined>(undefined);
   const handleLeftArrow = () => {
     onChange(value.subtract(1, "month"));
@@ -38,10 +41,23 @@ const CalenderHeader = ({ value, onChange }: CalenderHeaderProps) => {
         </div>
       </div>
       <div className="flex gap-4 items-center">
-        {/* Availability */}
-        <Button type="primary" onClick={() => setIsAvailabilityDrawerOpen(true)}>
+        <Button
+          type="primary"
+          onClick={() => setIsAvailabilityDrawerOpen(true)}
+          hidden={loggedInUserDetails?.userRole !== RoleEnum.doctor}
+        >
           Set Availability
         </Button>
+
+        <Button
+          type="primary"
+          onClick={() => setIsAppointmentDrawerOpen(true)}
+          hidden={loggedInUserDetails?.userRole !== RoleEnum.nurse}
+        >
+          New Appointment
+        </Button>
+
+        {/* Availability Drawer */}
         <Drawer
           title={<h1 className="text-xl font-bold">Set Availability</h1>}
           width={600}
@@ -51,10 +67,8 @@ const CalenderHeader = ({ value, onChange }: CalenderHeaderProps) => {
           <AvailabilityDrawer />
         </Drawer>
 
-        {/* Appointment */}
-        <Button type="primary" onClick={() => setIsAppointmentDrawerOpen(true)}>
-          New Appointment
-        </Button>
+        {/* Appointment Drawer */}
+
         <Drawer
           closable
           title="New Appointment"

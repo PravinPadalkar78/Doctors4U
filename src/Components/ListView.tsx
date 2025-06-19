@@ -5,7 +5,9 @@ import dayjs from "dayjs";
 import { useState } from "react";
 import AppointmentDrawer from "../utility/AppointmentDrawer";
 import DrawerFooter from "../utility/DrawerFooter";
+import { useAuth } from "../hooks/useAuth";
 const ListView = () => {
+  const { loggedInUserDetails } = useAuth();
   const { bookedSlotsDetails, isAppointmentDrawerOpen, setIsAppointmentDrawerOpen } = useDoctorDetails();
   const [filterDate, setFilterDate] = useState<string | undefined>(undefined); //format - > DD/MM/YYYY
   const [filterMonth, setFilterMonth] = useState<string | undefined>(undefined); //format MM/YYYY
@@ -73,9 +75,11 @@ const ListView = () => {
           </Button>
           <DatePicker onChange={onMonthChange} picker="month" />
         </div>
-        <Button type="primary" onClick={() => setIsAppointmentDrawerOpen(true)}>
-          New Appointment
-        </Button>
+        {loggedInUserDetails?.userRole === "nurse" && (
+          <Button type="primary" onClick={() => setIsAppointmentDrawerOpen(true)}>
+            New Appointment
+          </Button>
+        )}
         <Drawer
           closable
           title="New Appointment"

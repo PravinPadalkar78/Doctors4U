@@ -68,7 +68,11 @@ const StepTwoContent = ({
     <>
       <div className="mb-6">
         <h1 className="text-base font-bold">
-          Selected Doctor : {doctersDetails.find((doctor) => doctor.doctorId == selectedDoctorId)?.doctorName}
+          Selected Doctor :
+          {(() => {
+            const doctor = doctersDetails.find((d) => d.doctorId === selectedDoctorId);
+            return doctor ? `${doctor.doctorFirstName} ${doctor.doctorLastName}` : "Not found";
+          })()}
         </h1>
         <Select
           showSearch
@@ -81,7 +85,7 @@ const StepTwoContent = ({
             (optionA?.label ?? "").toLowerCase().localeCompare((optionB?.label ?? "").toLowerCase())
           }
           options={doctersDetails.map((doctor) => ({
-            label: doctor.doctorName,
+            label: doctor.doctorFirstName + " " + doctor.doctorLastName,
             value: doctor.doctorId,
           }))}
         />
