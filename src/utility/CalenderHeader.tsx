@@ -8,6 +8,7 @@ import { useDoctorDetails } from "../hooks/useDoctorDetails";
 import DrawerFooter from "./DrawerFooter";
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
+import { RoleEnum } from "../Helper/types";
 
 type CalenderHeaderProps = {
   value: Dayjs;
@@ -40,15 +41,21 @@ const CalenderHeader = ({ value, onChange }: CalenderHeaderProps) => {
         </div>
       </div>
       <div className="flex gap-4 items-center">
-        {loggedInUserDetails?.userRole === "doctor" ? (
-          <Button type="primary" onClick={() => setIsAvailabilityDrawerOpen(true)}>
-            Set Availability
-          </Button>
-        ) : (
-          <Button type="primary" onClick={() => setIsAppointmentDrawerOpen(true)}>
-            New Appointment
-          </Button>
-        )}
+        <Button
+          type="primary"
+          onClick={() => setIsAvailabilityDrawerOpen(true)}
+          hidden={loggedInUserDetails?.userRole !== RoleEnum.doctor}
+        >
+          Set Availability
+        </Button>
+
+        <Button
+          type="primary"
+          onClick={() => setIsAppointmentDrawerOpen(true)}
+          hidden={loggedInUserDetails?.userRole !== RoleEnum.nurse}
+        >
+          New Appointment
+        </Button>
 
         {/* Availability Drawer */}
         <Drawer

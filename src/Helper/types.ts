@@ -54,9 +54,13 @@ export type ModalSlotDetails = {
   note: string | undefined;
 };
 
+export enum RoleEnum {
+  "nurse" = "Nurse",
+  "doctor" = "Doctor",
+}
 export interface ILoggedInUserDetails {
   userId: string;
-  userRole: string;
+  userRole: RoleEnum;
   userFirstName: string;
   userLastName?: string;
   userEmailId?: string;
@@ -67,5 +71,5 @@ export interface IUsersList {
   userId: string;
   emailId: string;
   password: string;
-  role: "doctor" | "nurse";
+  role: RoleEnum;
 }

@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
-import type { ILoggedInUserDetails, IUsersList } from "../Helper/types";
+import { RoleEnum, type ILoggedInUserDetails, type IUsersList } from "../Helper/types";
 
 interface IAuthContext {
   isAuthenticated: boolean;
@@ -30,13 +30,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             userId: "1",
             emailId: "doctor@gmail.com",
             password: `$2a$10$O.ZvjUnZzQK0gJ8IzFO8J.FSosNqT0BGVn8iuVZsGbHrogqYVYDfe`,
-            role: "doctor",
+            role: RoleEnum.doctor,
           },
           {
             userId: "2",
             emailId: "nurse1@gmail.com",
             password: `$2a$10$O.ZvjUnZzQK0gJ8IzFO8J.FSosNqT0BGVn8iuVZsGbHrogqYVYDfe`,
-            role: "nurse",
+            role: RoleEnum.nurse,
           },
         ];
   });

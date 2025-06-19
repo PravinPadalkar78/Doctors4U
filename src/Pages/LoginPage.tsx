@@ -5,6 +5,7 @@ import { useDoctorDetails } from "../hooks/useDoctorDetails";
 import { useAuth } from "../hooks/useAuth";
 import useApp from "antd/es/app/useApp";
 import bcrypt from "bcryptjs";
+import { RoleEnum, type doctorDetailsType, type nurseDetailsType } from "../Helper/types";
 
 type FieldType = {
   email: string;
@@ -27,8 +28,8 @@ const LoginPage = () => {
           console.log(values.password, matchedUser.password);
           return;
         }
-        if (matchedUser.role == "doctor") {
-          const userDetails = doctersDetails.find((doctor) => doctor.doctorId == matchedUser.userId);
+        if (matchedUser.role == RoleEnum.doctor) {
+          const userDetails = doctersDetails.find((doctor: doctorDetailsType) => doctor.doctorId == matchedUser.userId);
           if (userDetails) {
             setIsAuthenticated(true);
             setLoggedInUserDetails({
@@ -36,7 +37,7 @@ const LoginPage = () => {
               userFirstName: userDetails.doctorFirstName,
               userLastName: userDetails.doctorLastName,
               userPhoneNo: userDetails.doctorPhoneNo,
-              userRole: "doctor",
+              userRole: RoleEnum.doctor,
               userEmailId: userDetails.emailId,
             });
             message.success(`Login Successful!!! Welcome `);
@@ -44,8 +45,8 @@ const LoginPage = () => {
           } else {
             message.error("Couldn't Match Id");
           }
-        } else if (matchedUser.role == "nurse") {
-          const userDetails = nurseDetails.find((nurse) => nurse.nurseId == matchedUser.userId);
+        } else if (matchedUser.role == RoleEnum.nurse) {
+          const userDetails = nurseDetails.find((nurse: nurseDetailsType) => nurse.nurseId == matchedUser.userId);
           if (userDetails) {
             setIsAuthenticated(true);
             setLoggedInUserDetails({
@@ -53,7 +54,7 @@ const LoginPage = () => {
               userFirstName: userDetails.nurseFirstName,
               userLastName: userDetails.nurseLastName,
               userPhoneNo: userDetails.nursePhoneNo,
-              userRole: "nurse",
+              userRole: RoleEnum.nurse,
               userEmailId: userDetails.emailId,
             });
             message.success(`Login Successful!!! Welcome `);

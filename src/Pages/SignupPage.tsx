@@ -75,8 +75,8 @@ const SignupPage = () => {
     }
   };
 
-  const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+  const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = () => {
+    message.error("Submission Failed");
   };
   const [selectedRole, setSelectedRole] = useState<string>("doctor");
   return (
