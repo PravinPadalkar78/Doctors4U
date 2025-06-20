@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router";
 import type { CheckboxGroupProps } from "antd/es/checkbox";
 import { useState } from "react";
 import { useDoctorDetails } from "../hooks/useDoctorDetails";
-import type { doctorDetailsType, IUsersList, nurseDetailsType } from "../Helper/types";
+import { SlotDurationEnum, type doctorDetailsType, type IUsersList, type nurseDetailsType } from "../Helper/types";
 import useApp from "antd/es/app/useApp";
 import { useAuth } from "../hooks/useAuth";
 import bcrypt from "bcryptjs";
@@ -55,6 +55,7 @@ const SignupPage = () => {
           doctorLastName: values.lastName,
           doctorPhoneNo: values.phoneNo,
           emailId: values.email,
+          slotDuration:SlotDurationEnum.thirty
         } as doctorDetailsType;
         setDoctersDetails((prev) => [...prev, newDoctorDetails]);
       } else if (selectedRole == "nurse") {
