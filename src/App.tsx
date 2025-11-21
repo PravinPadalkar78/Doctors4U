@@ -19,6 +19,7 @@ function App() {
           <DoctorDetailsProvider>
             <Routes>
               <Route path="/" element={<Navigate to="/login" replace />} />
+
               <Route path="/doctor" element={<AppLayout />}>
                 <Route path="appointment" element={<Appointment />} />
                 <Route path="pastAppointment" element={<PastAppointment />} />
