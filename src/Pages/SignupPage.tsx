@@ -4,7 +4,13 @@ import { Link, useNavigate } from "react-router";
 import type { CheckboxGroupProps } from "antd/es/checkbox";
 import { useState } from "react";
 import { useDoctorDetails } from "../hooks/useDoctorDetails";
-import { SlotDurationEnum, type doctorDetailsType, type IUsersList, type nurseDetailsType } from "../Helper/types";
+import {
+  RoleEnum,
+  SlotDurationEnum,
+  type doctorDetailsType,
+  type IUsersList,
+  type nurseDetailsType,
+} from "../Helper/types";
 import useApp from "antd/es/app/useApp";
 import { useAuth } from "../hooks/useAuth";
 import bcrypt from "bcryptjs";
@@ -26,8 +32,8 @@ const SignupPage = () => {
   const { message } = useApp();
   const SALT_ROUNDS = 10;
   const RadioOptions: CheckboxGroupProps<string>["options"] = [
-    { label: "Doctor", value: "doctor", className: "label-1" },
-    { label: "Nurse", value: "nurse", className: "label-2" },
+    { label: "Doctor", value: "Doctor", className: "label-1" },
+    { label: "Nurse", value: "Nurse", className: "label-2" },
   ];
   const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
     if (values.password !== values.confirmPassword) {
@@ -48,17 +54,17 @@ const SignupPage = () => {
         password: hashedPassword,
         role: selectedRole,
       } as IUsersList;
-      if (selectedRole == "doctor") {
+      if (selectedRole == RoleEnum.doctor) {
         let newDoctorDetails = {
           doctorId: newId,
           doctorFirstName: values.firstName,
           doctorLastName: values.lastName,
           doctorPhoneNo: values.phoneNo,
           emailId: values.email,
-          slotDuration:SlotDurationEnum.thirty
+          slotDuration: SlotDurationEnum.thirty,
         } as doctorDetailsType;
         setDoctersDetails((prev) => [...prev, newDoctorDetails]);
-      } else if (selectedRole == "nurse") {
+      } else if (selectedRole == RoleEnum.nurse) {
         let newNurseEntry = {
           nurseId: newId,
           nurseFirstName: values.firstName,
@@ -79,7 +85,7 @@ const SignupPage = () => {
   const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = () => {
     message.error("Submission Failed");
   };
-  const [selectedRole, setSelectedRole] = useState<string>("doctor");
+  const [selectedRole, setSelectedRole] = useState<RoleEnum>(RoleEnum.doctor);
   return (
     <section className="flex">
       <img src={background} className="h-[100vh]"></img>

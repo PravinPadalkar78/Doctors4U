@@ -6,6 +6,7 @@ import { useState } from "react";
 import AppointmentDrawer from "../utility/AppointmentDrawer";
 import DrawerFooter from "../utility/DrawerFooter";
 import { useAuth } from "../hooks/useAuth";
+import { RoleEnum } from "../Helper/types";
 const ListView = () => {
   const { loggedInUserDetails } = useAuth();
   const { bookedSlotsDetails, isAppointmentDrawerOpen, setIsAppointmentDrawerOpen } = useDoctorDetails();
@@ -75,11 +76,15 @@ const ListView = () => {
           </Button>
           <DatePicker onChange={onMonthChange} picker="month" />
         </div>
-        {loggedInUserDetails?.userRole === "nurse" && (
-          <Button type="primary" onClick={() => setIsAppointmentDrawerOpen(true)}>
-            New Appointment
-          </Button>
-        )}
+
+        <Button
+          type="primary"
+          onClick={() => setIsAppointmentDrawerOpen(true)}
+          hidden={loggedInUserDetails?.userRole as RoleEnum === RoleEnum.doctor}
+        >
+          New Appointment
+        </Button>
+
         <Drawer
           closable
           title="New Appointment"
