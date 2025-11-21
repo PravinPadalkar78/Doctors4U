@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { Routes, Route, useLocation, Navigate } from "react-router";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import AppLayout from "./Components/AppLayout";
 import ThemeProvider from "./Provider/ThemeProvider";
 import DoctorDetailsProvider from "./Provider/DoctorDetailsProvider";
@@ -11,15 +11,14 @@ import SignupPage from "./Pages/SignupPage";
 import { AuthProvider } from "./Provider/AuthProvider";
 import { App as AntApp } from "antd";
 function App() {
-  const { pathname } = useLocation();
 
   return (
     <ThemeProvider>
       <AuthProvider>
         <AntApp>
           <DoctorDetailsProvider>
-            {pathname === "/" ? <Navigate to="/login" replace /> : null}
             <Routes>
+              <Route path="/" element={<Navigate to="/login" replace />} />
               <Route path="/doctor" element={<AppLayout />}>
                 <Route path="appointment" element={<Appointment />} />
                 <Route path="pastAppointment" element={<PastAppointment />} />
@@ -28,10 +27,9 @@ function App() {
                 <Route path="appointment" element={<Appointment />} />
                 <Route path="pastAppointment" element={<PastAppointment />} />
               </Route>
-              <Route>
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/signup" element={<SignupPage />} />
-              </Route>
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignupPage />} />
+
             </Routes>
           </DoctorDetailsProvider>
         </AntApp>

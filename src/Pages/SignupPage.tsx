@@ -88,7 +88,7 @@ const SignupPage = () => {
   const [selectedRole, setSelectedRole] = useState<RoleEnum>(RoleEnum.doctor);
   return (
     <section className="flex">
-      <img src={background} className="h-[100vh]"></img>
+      <img src={background} className="h-[100vh] hidden lg:block"></img>
       <div className="flex w-full items-center justify-center">
         <Form
           form={form}
