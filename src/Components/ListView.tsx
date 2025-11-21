@@ -80,7 +80,7 @@ const ListView = () => {
         <Button
           type="primary"
           onClick={() => setIsAppointmentDrawerOpen(true)}
-          hidden={loggedInUserDetails?.userRole as RoleEnum === RoleEnum.doctor}
+          hidden={loggedInUserDetails?.userRole == RoleEnum.doctor}
         >
           New Appointment
         </Button>
